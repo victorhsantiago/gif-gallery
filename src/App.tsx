@@ -1,5 +1,5 @@
 import { useFetchGifs } from '@hooks/useGiphy'
-import { Grid } from './components'
+import { Card, Grid } from '@components/index'
 
 function App() {
   const { data: gifs, loading } = useFetchGifs()
@@ -9,7 +9,11 @@ function App() {
       {loading && <p>Loading...</p>}
       <Grid>
         {gifs.map((gif) => (
-          <img key={gif.id} src={gif.images.original.webp} alt={gif.title} />
+          <Card
+            key={gif.id}
+            imageUrl={gif.images.original.webp}
+            title={gif.title}
+          />
         ))}
       </Grid>
     </>
