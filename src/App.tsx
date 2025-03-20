@@ -1,12 +1,17 @@
 import { useFetchGifs } from '@hooks/useGiphy'
+import { Grid } from './components'
 
 function App() {
-  const { data, loading } = useFetchGifs()
+  const { data: gifs, loading } = useFetchGifs()
   return (
     <>
       <h1>Trending Gifs</h1>
       {loading && <p>Loading...</p>}
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <Grid>
+        {gifs.map((gif) => (
+          <img key={gif.id} src={gif.images.original.webp} alt={gif.title} />
+        ))}
+      </Grid>
     </>
   )
 }
