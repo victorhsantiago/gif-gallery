@@ -28,6 +28,7 @@
       "@components/*": ["./components/*"],
       "@hooks/*": ["./hooks/*"],
       "@models/*": ["./models/*"],
+      "@pages/*": ["./pages/*"],
       "@services/*": ["./services/*"]
     }
   },
