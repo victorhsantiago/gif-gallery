@@ -97,25 +97,29 @@ export const GlobalStyles = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    font-family: ${({ theme }) => theme.fonts.body};
+    font-family: ${({ theme }) => theme.font};
     font-optical-sizing: auto;
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.primaryText};
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: ${({ theme }) => theme.fonts.heading};
+    font-family: ${({ theme }) => theme.font};
     margin: 0;
   }
 
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 
+  button {
+    color: inherit;
+  }
 `
 
 const baseTheme = {
-  fonts: {
-    body: "'Open Sans', sans-serif",
-    heading: "'Montserrat', sans-serif",
-  },
+  font: "'Noto Sans', sans-serif",
 }
 
 export const lightTheme = {

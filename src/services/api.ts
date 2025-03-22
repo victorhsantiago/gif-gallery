@@ -34,3 +34,24 @@ export async function getTrendingGifs({
     throw error
   }
 }
+
+export async function getGif(id: string): Promise<Gif> {
+  try {
+    const url = new URL(`${GIPHY_BASE_URL}/${id}`)
+    url.search = new URLSearchParams({
+      api_key: GIPHY_API_KEY,
+    }).toString()
+
+    const response = await fetch(url.toString())
+
+    if (!response.ok) {
+      throw new Error(`Error fetching gif: ${response.statusText}`)
+    }
+
+    const { data }: { data: Gif } = await response.json()
+    return data
+  } catch (error) {
+    console.error('Error fetching gif:', error)
+    throw error
+  }
+}
