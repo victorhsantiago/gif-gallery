@@ -6,10 +6,6 @@ export const CardContainer = styled.div`
   aspect-ratio: 1 / 1;
   display: flex;
   flex-direction: column;
-
-  &:focus {
-    outline: 2px solid ${({ theme }) => theme.colors.accent};
-  }
 `
 
 export const ImageWrapper = styled.div`

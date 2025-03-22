@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledGrid } from './StyledGrid'
+import { StyledGrid } from './Grid.styled'
 
 interface GridProps {
   children: React.ReactNode

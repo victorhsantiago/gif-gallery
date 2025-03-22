@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardContainer, ImageWrapper, Title, TitleWrapper } from './StyledCard'
+import { CardContainer, ImageWrapper, Title, TitleWrapper } from './Card.styled'
 import { ImageWithLoader } from '@components/ImageWithLoader/ImageWithLoader'
 
 export interface CardProps {

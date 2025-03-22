@@ -10,7 +10,7 @@ import {
   ModalContainer,
   ModalHeader,
   Overlay,
-} from './StyledGifModal'
+} from './GifModal.styled'
 import { Gif } from '@models/index'
 
 export function GifModal() {

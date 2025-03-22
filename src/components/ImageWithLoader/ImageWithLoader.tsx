@@ -1,6 +1,6 @@
-import { Loading } from '@components/Loading/Loading'
 import { useState } from 'react'
-import { LoaderWrapper, StyledImage, Wrapper } from './StyledImageWithLoader'
+import { Loading } from '@components/index'
+import { LoaderWrapper, StyledImage, Wrapper } from './ImageWithLoader.styled'
 
 interface ImageWithLoaderProps {
   src: string

@@ -94,6 +94,10 @@ export const GlobalStyles = createGlobalStyle`
     --font-weight-bold: 700;
   }
 
+  * &:focus {
+    outline: 2px solid ${({ theme }) => theme.colors.accent};
+  }
+
   body {
     margin: 0;
     padding: 0;
