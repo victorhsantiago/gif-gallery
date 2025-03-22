@@ -4,7 +4,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 
 function Home() {
-  const { data: gifs, fetchGifs, loading } = useFetchGifs()
+  const { data: gifs, fetchGifs } = useFetchGifs()
   const location = useLocation()
 
   useEffect(() => {
@@ -13,7 +13,6 @@ function Home() {
   return (
     <>
       <h1>Trending Gifs</h1>
-      {loading && <p>Loading...</p>}
       <Grid>
         {gifs.map((gif) => (
           <Link

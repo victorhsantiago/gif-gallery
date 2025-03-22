@@ -1,5 +1,6 @@
 import React from 'react'
 import { CardContainer, ImageWrapper, Title, TitleWrapper } from './StyledCard'
+import { ImageWithLoader } from '@components/ImageWithLoader/ImageWithLoader'
 
 export interface CardProps {
   title: string
@@ -10,7 +11,7 @@ export const Card: React.FC<CardProps> = ({ title, imageUrl }) => {
   return (
     <CardContainer>
       <ImageWrapper>
-        <img src={imageUrl} alt={title} />
+        <ImageWithLoader src={imageUrl} alt={title} />
       </ImageWrapper>
       <TitleWrapper>
         <Title>{title}</Title>
