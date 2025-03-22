@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { useParams, useNavigate, useOutletContext } from 'react-router-dom'
+import {
+  useParams,
+  useNavigate,
+  useOutletContext,
+  useLocation,
+} from 'react-router-dom'
 import {
   CloseButton,
   ModalContainer,
@@ -11,12 +16,26 @@ import { Gif } from '@models/index'
 export function GifModal() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const location = useLocation()
   const { gifs } = useOutletContext<{ gifs: Gif[] }>()
   const [gif, setGif] = useState<Gif | undefined>(undefined)
   const modalRef = useRef<HTMLDivElement>(null)
 
+  const { focusId } = (location.state as { focusId?: string }) || {}
+
   function handleClose() {
     navigate(-1)
+
+    setTimeout(() => {
+      if (focusId) {
+        const linkEl = document.getElementById(
+          focusId
+        ) as HTMLAnchorElement | null
+        if (linkEl) {
+          linkEl.focus()
+        }
+      }
+    }, 0)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

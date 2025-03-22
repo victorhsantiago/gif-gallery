@@ -4,21 +4,11 @@ import { CardContainer, ImageWrapper, Title, TitleWrapper } from './StyledCard'
 export interface CardProps {
   title: string
   imageUrl: string
-  onClick?: () => void
 }
 
-export const Card: React.FC<CardProps> = ({ title, imageUrl, onClick }) => {
+export const Card: React.FC<CardProps> = ({ title, imageUrl }) => {
   return (
-    <CardContainer
-      tabIndex={0}
-      role="button"
-      onClick={onClick}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter') {
-          onClick?.()
-        }
-      }}
-    >
+    <CardContainer>
       <ImageWrapper>
         <img src={imageUrl} alt={title} />
       </ImageWrapper>

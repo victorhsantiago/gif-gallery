@@ -1,10 +1,11 @@
 import { useFetchGifs } from '@hooks/useGiphy'
 import { Card, Grid } from '@components/index'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 
 function Home() {
   const { data: gifs, fetchGifs, loading } = useFetchGifs()
+  const location = useLocation()
 
   useEffect(() => {
     fetchGifs()
@@ -15,7 +16,15 @@ function Home() {
       {loading && <p>Loading...</p>}
       <Grid>
         {gifs.map((gif) => (
-          <Link key={gif.id} to={`/gif/${gif.id}`}>
+          <Link
+            key={gif.id}
+            to={`/gif/${gif.id}`}
+            state={{
+              backgroundLocation: location,
+              focusId: `gif-link-${gif.id}`,
+            }}
+            id={`gif-link-${gif.id}`}
+          >
             <Card imageUrl={gif.images.original.webp} title={gif.title} />
           </Link>
         ))}
