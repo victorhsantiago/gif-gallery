@@ -12,6 +12,7 @@ import {
   Overlay,
 } from './GifModal.styled'
 import { Gif } from '@models/index'
+import { ImageWithLoader } from '@components/index'
 
 export function GifModal() {
   const { id } = useParams()
@@ -47,7 +48,7 @@ export function GifModal() {
 
   useEffect(() => {
     if (id) setGif(gifs.find((gif) => gif.id === id))
-  }, [id])
+  }, [id, gifs])
 
   useEffect(() => {
     if (modalRef.current) {
@@ -78,7 +79,7 @@ export function GifModal() {
                 &times;
               </CloseButton>
             </ModalHeader>
-            <img src={gif.images.original.webp} alt={gif.title} />
+            <ImageWithLoader src={gif.images.original.webp} alt={gif.title} />
           </>
         )}
       </ModalContainer>
