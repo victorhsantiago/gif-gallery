@@ -1,23 +1,19 @@
-import { useEffect, useRef } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import { useFetchGifs } from '@hooks/useGiphy'
+import { useEffect, useRef, useState } from 'react'
+import { useParams, useNavigate, useOutletContext } from 'react-router-dom'
 import {
   CloseButton,
   ModalContainer,
   ModalHeader,
   Overlay,
 } from './StyledGifModal'
+import { Gif } from '@models/index'
 
 export function GifModal() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { gif, fetchGif } = useFetchGifs()
-
+  const { gifs } = useOutletContext<{ gifs: Gif[] }>()
+  const [gif, setGif] = useState<Gif | undefined>(undefined)
   const modalRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (id) fetchGif(id)
-  }, [id])
 
   function handleClose() {
     navigate(-1)
@@ -29,6 +25,10 @@ export function GifModal() {
       handleClose()
     }
   }
+
+  useEffect(() => {
+    if (id) setGif(gifs.find((gif) => gif.id === id))
+  }, [id])
 
   useEffect(() => {
     if (modalRef.current) {

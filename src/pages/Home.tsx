@@ -1,6 +1,6 @@
 import { useFetchGifs } from '@hooks/useGiphy'
 import { Card, Grid } from '@components/index'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { useEffect } from 'react'
 
 function Home() {
@@ -20,6 +20,8 @@ function Home() {
           </Link>
         ))}
       </Grid>
+
+      <Outlet context={{ gifs }} />
     </>
   )
 }
