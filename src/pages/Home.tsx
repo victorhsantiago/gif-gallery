@@ -3,7 +3,7 @@ import { Card, Grid, Header } from '@components/index'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 
-function Home() {
+export function Home() {
   const { gifsList: gifs, fetchGifs, search } = useFetchGifs()
   const location = useLocation()
 
@@ -33,5 +33,3 @@ function Home() {
     </>
   )
 }
-
-export default Home

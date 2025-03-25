@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { GifModal } from '@components/index'
-import Home from '@pages/Home'
+import { Home } from '@pages/Home'
 
 function App() {
   return (

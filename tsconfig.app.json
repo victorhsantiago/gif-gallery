@@ -30,8 +30,10 @@
       "@models/*": ["./models/*"],
       "@pages/*": ["./pages/*"],
       "@services/*": ["./services/*"],
+      "@tests/*": ["./tests/*"],
       "@utils/*": ["./utils/*"]
-    }
+    },
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
   "include": ["src"]
 }
