@@ -1,4 +1,13 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`
 
 export const Overlay = styled.div`
   position: fixed;
@@ -6,6 +15,7 @@ export const Overlay = styled.div`
   inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
+  animation: ${fadeIn} 0.3s ease-out;
 `
 
 export const ModalContainer = styled.div`
@@ -20,12 +30,13 @@ export const ModalContainer = styled.div`
   border-radius: var(--spacing-xs);
   overflow-y: auto;
   padding: var(--spacing-md);
+  transition: height 0.3s;
+  animation: ${fadeIn} 0.3s ease-out;
 
   & img {
     width: 100%;
     max-height: 100%;
     object-fit: contain;
-    margin: auto;
   }
 `
 
