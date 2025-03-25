@@ -3,6 +3,13 @@ import styled from 'styled-components'
 export const SearchFormStyled = styled.form`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  max-width: 30rem;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    max-width: 20rem;
+  }
 `
 
 export const SearchInput = styled.input`
@@ -11,6 +18,7 @@ export const SearchInput = styled.input`
   border: none;
   background-color: transparent;
   color: ${({ theme }) => theme.colors.primaryText};
+  flex: 1;
 `
 
 export const SearchButton = styled.button`

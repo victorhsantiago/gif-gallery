@@ -33,7 +33,12 @@ export const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: start;
+  gap: var(--spacing-sm);
   margin-bottom: var(--spacing-md);
+
+  & h2 {
+    font-size: var(--font-size-lg);
+  }
 `
 
 export const CloseButton = styled.button`

@@ -9,6 +9,8 @@ export const TopRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
 `
 
 export const TagRow = styled.div`
