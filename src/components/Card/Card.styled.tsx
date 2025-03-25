@@ -6,6 +6,12 @@ export const CardContainer = styled.div`
   aspect-ratio: 1 / 1;
   display: flex;
   flex-direction: column;
+  border-radius: var(--spacing-xs);
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 0 0 4px ${({ theme }) => theme.colors.accent};
+  }
 `
 
 export const ImageWrapper = styled.div`

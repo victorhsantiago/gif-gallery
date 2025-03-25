@@ -1,54 +1,33 @@
-import { useEffect, useRef, useState } from 'react'
-import {
-  useParams,
-  useNavigate,
-  useOutletContext,
-  useLocation,
-} from 'react-router-dom'
+import { useEffect, useRef } from 'react'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import {
   CloseButton,
   ModalContainer,
   ModalHeader,
   Overlay,
 } from './GifModal.styled'
-import { Gif } from '@models/index'
 import { ImageWithLoader } from '@components/index'
+import { useFetchGifs } from '@hooks/useGiphy'
+import { handleEscKeyDown } from '@utils/domUtils'
 
 export function GifModal() {
   const { id } = useParams()
   const navigate = useNavigate()
   const location = useLocation()
-  const { gifs } = useOutletContext<{ gifs: Gif[] }>()
-  const [gif, setGif] = useState<Gif | undefined>(undefined)
+  const { fetchGif, gif } = useFetchGifs()
   const modalRef = useRef<HTMLDivElement>(null)
 
   const { focusId } = (location.state as { focusId?: string }) || {}
 
   function handleClose() {
     navigate(-1)
-
-    setTimeout(() => {
-      if (focusId) {
-        const linkEl = document.getElementById(
-          focusId
-        ) as HTMLAnchorElement | null
-        if (linkEl) {
-          linkEl.focus()
-        }
-      }
-    }, 0)
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      e.stopPropagation()
-      handleClose()
-    }
   }
 
   useEffect(() => {
-    if (id) setGif(gifs.find((gif) => gif.id === id))
-  }, [id, gifs])
+    if (id) {
+      fetchGif(id)
+    }
+  }, [id])
 
   useEffect(() => {
     if (modalRef.current) {
@@ -69,7 +48,7 @@ export function GifModal() {
         tabIndex={-1}
         ref={modalRef}
         onClick={(e) => e.stopPropagation()}
-        onKeyDown={handleKeyDown}
+        onKeyDown={(e) => handleEscKeyDown(e, handleClose, focusId)}
       >
         {gif && (
           <>

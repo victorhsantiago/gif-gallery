@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, DefaultTheme } from 'styled-components'
 
 export const GlobalStyles = createGlobalStyle`
   /* 1. Use a more-intuitive box-sizing model */
@@ -88,6 +88,7 @@ export const GlobalStyles = createGlobalStyle`
     --font-size-sm: 0.875rem;
     --font-size-md: 1rem;
     --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
 
     /* Font weights */
     --font-weight-normal: 400;
@@ -115,6 +116,7 @@ export const GlobalStyles = createGlobalStyle`
   a {
     text-decoration: none;
     color: inherit;
+    border-radius: var(--spacing-xs);
   }
 
   button {
@@ -124,9 +126,14 @@ export const GlobalStyles = createGlobalStyle`
 
 const baseTheme = {
   font: "'Noto Sans', sans-serif",
+  breakpoints: {
+    sm: '375px',
+    md: '768px',
+    lg: '1024px',
+  },
 }
 
-export const lightTheme = {
+export const lightTheme: DefaultTheme = {
   ...baseTheme,
   colors: {
     background: 'hsla(207, 80%, 92%, 1)',
@@ -137,7 +144,7 @@ export const lightTheme = {
   },
 }
 
-export const darkTheme = {
+export const darkTheme: DefaultTheme = {
   ...baseTheme,
   colors: {
     background: 'hsl(207, 24%, 15%)',
