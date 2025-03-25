@@ -1,10 +1,10 @@
 import { useFetchGifs } from '@hooks/useGiphy'
-import { Card, Grid } from '@components/index'
+import { Card, Grid, Header } from '@components/index'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 
 function Home() {
-  const { data: gifs, fetchGifs } = useFetchGifs()
+  const { gifsList: gifs, fetchGifs, search } = useFetchGifs()
   const location = useLocation()
 
   useEffect(() => {
@@ -12,7 +12,7 @@ function Home() {
   }, [])
   return (
     <>
-      <h1>Trending Gifs</h1>
+      <Header onSearch={search} onClearSearch={fetchGifs} />
       <Grid>
         {gifs.map((gif) => (
           <Link
@@ -29,7 +29,7 @@ function Home() {
         ))}
       </Grid>
 
-      <Outlet context={{ gifs }} />
+      <Outlet />
     </>
   )
 }

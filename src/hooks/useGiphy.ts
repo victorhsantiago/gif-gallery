@@ -1,17 +1,18 @@
 import { useState } from 'react'
 import { Gif } from '@models/index'
-import { getGif, getTrendingGifs } from '@services/api'
+import { getGif, getTrendingGifs, searchGifs } from '@services/api'
 
 export function useFetchGifs() {
-  const [gifsList, setData] = useState<Gif[]>([])
-  const [gif, setGif] = useState<Gif | null>(null)
+  const [gifsList, setGifsList] = useState<Gif[]>([])
+  const [gif, setGif] = useState<Gif | undefined>(undefined)
+
   const [loading, setLoading] = useState(true)
 
   const fetchGifs = async () => {
     setLoading(true)
     try {
       const response = await getTrendingGifs()
-      setData(response)
+      setGifsList(response)
     } catch (error) {
       console.error(error)
     } finally {
@@ -22,8 +23,8 @@ export function useFetchGifs() {
   const fetchGif = async (id: string) => {
     setLoading(true)
     try {
-      const response = await getGif(id)
-      setGif(response)
+      const data = await getGif(id)
+      setGif(data)
     } catch (error) {
       console.error(error)
     } finally {
@@ -31,5 +32,17 @@ export function useFetchGifs() {
     }
   }
 
-  return { data: gifsList, loading, fetchGifs, fetchGif, gif }
+  const search = async (query: string) => {
+    setLoading(true)
+    try {
+      const response = await searchGifs({ query })
+      setGifsList(response)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return { gif, gifsList, loading, fetchGifs, fetchGif, search }
 }

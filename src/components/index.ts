@@ -1,5 +1,8 @@
 export { Card } from './Card/Card'
 export { GifModal } from './GifModal/GifModal'
 export { Grid } from './Grid/Grid'
+export { Header } from './Header/Header'
 export { ImageWithLoader } from './ImageWithLoader/ImageWithLoader'
 export { Loading } from './Loading/Loading'
+export { SearchForm } from './SearchForm/SearchForm'
+export { SearchTag } from './SearchTag/SearchTag'
