@@ -1,14 +1,23 @@
-import { Route, Routes } from 'react-router-dom'
-import { GifModal } from '@components/index'
-import { Home } from '@pages/Home'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { Header } from '@components/index'
 
 function App() {
+  const navigate = useNavigate()
+
+  function onSearch(query: string) {
+    navigate(`/search?q=${query}`)
+  }
+
+  function onClearSearch() {
+    navigate('/')
+  }
+
   return (
-    <Routes>
-      <Route path="/" element={<Home />}>
-        <Route path="/gif/:id" element={<GifModal />} />
-      </Route>
-    </Routes>
+    <>
+      <Header onSearch={onSearch} onClearSearch={onClearSearch} />
+
+      <Outlet />
+    </>
   )
 }
 

@@ -1,17 +1,16 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ThemeProvider } from 'styled-components'
-import { BrowserRouter } from 'react-router-dom'
+import { RouterProvider } from 'react-router-dom'
 import { darkTheme, GlobalStyles } from './GlobalStyles.tsx'
-import App from './App.tsx'
+
+import { router } from './routes.ts'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider theme={darkTheme}>
       <GlobalStyles />
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </ThemeProvider>
   </StrictMode>
 )

@@ -47,7 +47,11 @@ export function useFetchGifs() {
     setLoading(true)
 
     try {
-      const response = await searchGifs({ query, limit: 24, offset: 0 })
+      const response = await searchGifs({
+        query,
+        limit: 24,
+        offset: reset ? 0 : offset,
+      })
       setGifsList((prev) => (reset ? response : [...prev, ...response]))
 
       if (reset) resetPagination()

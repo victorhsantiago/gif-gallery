@@ -1,34 +1,20 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { useFetchGifs } from '@hooks/useGiphy'
-import { Card, Grid, Header, Loading } from '@components/index'
+import { Card, Grid, Loading } from '@components/index'
+import { useInfiniteScroll } from '@hooks/useInfiniteScroll'
 
 export function Home() {
-  const { gifsList: gifs, fetchGifs, search, loading, hasMore } = useFetchGifs()
+  const { gifsList: gifs, fetchGifs, loading, hasMore } = useFetchGifs()
+  const lastGifRef = useInfiniteScroll(fetchGifs, hasMore, loading)
   const location = useLocation()
-  const observer = useRef<IntersectionObserver | null>(null)
 
   useEffect(() => {
     fetchGifs(true)
   }, [])
 
-  const lastGifRef = useCallback(
-    (node: HTMLAnchorElement | null) => {
-      if (loading) return
-      if (observer.current) observer.current.disconnect()
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMore) {
-          fetchGifs()
-        }
-      })
-      if (node) observer.current.observe(node)
-    },
-    [loading, hasMore, fetchGifs]
-  )
-
   return (
     <>
-      <Header onSearch={search} onClearSearch={fetchGifs} />
       <Grid>
         {gifs.map((gif, index) => (
           <Link
