@@ -1,18 +1,28 @@
 import { useState } from 'react'
 import { Gif } from '@models/index'
 import { getGif, getTrendingGifs, searchGifs } from '@services/api'
+import { usePagination } from './usePagination'
 
 export function useFetchGifs() {
   const [gifsList, setGifsList] = useState<Gif[]>([])
   const [gif, setGif] = useState<Gif | undefined>(undefined)
+  const [loading, setLoading] = useState(false)
+  const { offset, hasMore, resetPagination, updatePagination } = usePagination()
 
-  const [loading, setLoading] = useState(true)
-
-  const fetchGifs = async () => {
+  const fetchGifs = async (reset = false) => {
+    if (loading) return
     setLoading(true)
+
     try {
-      const response = await getTrendingGifs()
-      setGifsList(response)
+      const response = await getTrendingGifs({
+        limit: 24,
+        offset: reset ? 0 : offset,
+      })
+      setGifsList((prev) => (reset ? response : [...prev, ...response]))
+
+      if (reset) resetPagination()
+
+      updatePagination(response.length)
     } catch (error) {
       console.error(error)
     } finally {
@@ -32,11 +42,21 @@ export function useFetchGifs() {
     }
   }
 
-  const search = async (query: string) => {
+  const search = async (query: string, reset = false) => {
+    if (loading) return
     setLoading(true)
+
     try {
-      const response = await searchGifs({ query })
-      setGifsList(response)
+      const response = await searchGifs({
+        query,
+        limit: 24,
+        offset: reset ? 0 : offset,
+      })
+      setGifsList((prev) => (reset ? response : [...prev, ...response]))
+
+      if (reset) resetPagination()
+
+      updatePagination(response.length)
     } catch (error) {
       console.error(error)
     } finally {
@@ -44,5 +64,5 @@ export function useFetchGifs() {
     }
   }
 
-  return { gif, gifsList, loading, fetchGifs, fetchGif, search }
+  return { gif, gifsList, loading, hasMore, fetchGifs, fetchGif, search }
 }

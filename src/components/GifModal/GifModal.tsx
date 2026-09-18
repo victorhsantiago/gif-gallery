@@ -52,13 +52,14 @@ export function GifModal() {
       >
         {gif && (
           <>
+            <ImageWithLoader src={gif.images.original.webp} alt={gif.title} />
+            <CloseButton aria-label="Close" onClick={handleClose}>
+              &times;
+            </CloseButton>
+
             <ModalHeader>
               <h2>{gif.title}</h2>
-              <CloseButton aria-label="Close" onClick={handleClose}>
-                &times;
-              </CloseButton>
             </ModalHeader>
-            <ImageWithLoader src={gif.images.original.webp} alt={gif.title} />
           </>
         )}
       </ModalContainer>

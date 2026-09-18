@@ -11,6 +11,9 @@ const fadeIn = keyframes`
 
 export const Overlay = styled.div`
   position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 999;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
@@ -19,17 +22,13 @@ export const Overlay = styled.div`
 `
 
 export const ModalContainer = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
   width: 80%;
   max-width: 800px;
   max-height: 80%;
   background-color: ${({ theme }) => theme.colors.background};
   border-radius: var(--spacing-xs);
   overflow-y: auto;
-  padding: var(--spacing-md);
   transition: height 0.3s;
   animation: ${fadeIn} 0.3s ease-out;
 
@@ -45,7 +44,7 @@ export const ModalHeader = styled.div`
   justify-content: space-between;
   align-items: start;
   gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-md);
 
   & h2 {
     font-size: var(--font-size-lg);
@@ -53,8 +52,14 @@ export const ModalHeader = styled.div`
 `
 
 export const CloseButton = styled.button`
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
   border: none;
-  background: transparent;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
   font-size: var(--font-size-lg);
   cursor: pointer;
 `

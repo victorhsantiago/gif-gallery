@@ -39,6 +39,13 @@ describe('Home Component', () => {
       fetchGifs: mockFetchGifs,
       search: mockSearch,
     })
+
+    const mockIntersectionObserver = vi.fn()
+    mockIntersectionObserver.mockReturnValue({
+      observe: () => null,
+      disconnect: () => null,
+    })
+    window.IntersectionObserver = mockIntersectionObserver
   })
 
   it('should render the header and grid with gifs', () => {
